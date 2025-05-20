@@ -25,6 +25,7 @@ const Dashboard = () => {
       </Box>
 
       {/* Buyruq kiritish formasi */}
+      <pre>Run this command 'ЛЛНППВ' for example</pre>
       <CommandForm />
 
       {/* Manipulyator joylashgan grid (visualizatsiya) */}

@@ -1,0 +1,30 @@
+name: React CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kodni yuklash
+        uses: actions/checkout@v3
+
+      - name: Node.js versiyasini o‘rnatish
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Dependenciyalarni o‘rnatish
+        run: npm install
+
+      - name: Loyihani build qilish
+        run: npm run build
+
+      - name: Testlarni ishga tushirish (agar mavjud bo‘lsa)
+        run: npm test
