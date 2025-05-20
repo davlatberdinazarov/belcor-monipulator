@@ -1,4 +1,4 @@
-name: React CI
+name: Vite React CI
 
 on:
   push:
@@ -8,23 +8,30 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
       - name: Kodni yuklash
         uses: actions/checkout@v3
 
-      - name: Node.js versiyasini o‘rnatish
+      - name: Node.js o‘rnatish
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
       - name: Dependenciyalarni o‘rnatish
         run: npm install
 
-      - name: Loyihani build qilish
-        run: npm run build
+      - name: ESLint orqali lint tekshiruvi
+        run: npm run lint
 
-      - name: Testlarni ishga tushirish (agar mavjud bo‘lsa)
-        run: npm test
+      - name: Build qilish (Vite + TypeScript)
+        run: npm run build
