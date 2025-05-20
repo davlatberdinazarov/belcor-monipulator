@@ -9,7 +9,7 @@ const renderGrid = (grid: string[][]) => (
       {grid.map((row, rowIndex) => (
         <tr key={rowIndex}>
           {row.map((cell, colIndex) => (
-            <td key={colIndex} style={{ border: '1px solid #ccc', padding: '2px 5px' }}>{cell}</td>
+            <td key={colIndex} style={{ border: '1px solid #ccc', padding: '2px 8px' }}>{cell}</td>
           ))}
         </tr>
       ))}

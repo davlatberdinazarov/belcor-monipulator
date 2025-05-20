@@ -13,11 +13,13 @@ export interface CommandHistoryItem {
 export interface CommandState {
   history: CommandHistoryItem[];
   currentCommand: string; // 🔁 aktiv buyruq
+  currentPosition: { x: number; y: number }; // 🔧 qo‘shildi
 }
 
 const initialState: CommandState = {
   history: [],
   currentCommand: '',
+  currentPosition: { x: 0, y: 0 }, // 🔧 qo‘shildi
 };
 
 const commandSlice = createSlice({
@@ -35,7 +37,10 @@ const commandSlice = createSlice({
     },
     clearCurrentCommand(state) {
       state.currentCommand = '';
-    }
+    },
+    updatePosition: (state, action) => {
+      state.currentPosition = action.payload;
+    },
   },
 });
 
@@ -43,7 +48,8 @@ export const {
   addCommandToHistory,
   clearHistory,
   setCurrentCommand,
-  clearCurrentCommand
+  clearCurrentCommand,
+  updatePosition,
 } = commandSlice.actions;
 
 export default commandSlice.reducer;
